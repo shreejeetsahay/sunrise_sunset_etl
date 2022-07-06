@@ -6,9 +6,9 @@ API Documentation: https://sunrise-sunset.org/api
 The task is to build a dataset for Sunrise and Sunset timing for Pune( lat=18.5204, long=73.8567) using above api using Singer.io open source ETL. 
 
 The tap should perform the following function:
--Historical Load : load historical data since 1 Jan 2020
--Incremental Load : Append today’s data in existing target
--Transform data : Transform the timestamp from UTC to IST 
+1. Historical Load : load historical data since 1 Jan 2020
+2. Incremental Load : Append today’s data in existing target
+3. Transform data : Transform the timestamp from UTC to IST 
 
 
 To load data we use Target. Use the following pre-built target to load the data:
