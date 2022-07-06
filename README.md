@@ -23,8 +23,11 @@ The "sunrise_sunset_DE/virtualenvs" folder contains 3 virtual environments-
 The custom tap has been developed using python and can be found at location "sunrise_sunset_DE/virtualenvs/tap_singer/bin/tap-api.py". Please refer the comments in tap-api.py file for explanation of the code.
 
 Now, we have a state.json file in "sunrise_sunset_DE" which initially has the below entry:
+
 {
+
 	"last_record": 2019-12-31
+	
 }
 
 As you will see in the paragraphs below, when running the etl pipeline using tap-api.py and target, we pass state.json as --state argument for the tap, and this particular json file contains the date for which last record was fetched. Hence, for the current invocation, we start from the date after this date in the last record in state.json, and fetch all the records from the tap till the current date, and once the etl pipeline completes, we update state.json with the last record's date of the current invocation, so that for the next invocation, data can be appended from the date after last record's date till the current date.
