@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: target-sqlite
+Version: 0.2.0
+Summary: Singer.io target for importing data to SQLite
+Home-page: https://gitlab.com/meltano/target-sqlite
+Author: Meltano
+Author-email: meltano@gitlab.com
+License: UNKNOWN
+Description: # target-sqlite
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Provides-Extra: dev

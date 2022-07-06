@@ -1,0 +1,4 @@
+
+    [console_scripts]
+    target-sqlite=target_sqlite:main
+    

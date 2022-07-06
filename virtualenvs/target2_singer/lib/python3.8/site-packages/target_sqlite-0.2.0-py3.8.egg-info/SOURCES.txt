@@ -1,0 +1,15 @@
+README.md
+setup.cfg
+setup.py
+target_sqlite/__init__.py
+target_sqlite/sqlite_loader.py
+target_sqlite/target_sqlite.py
+target_sqlite.egg-info/PKG-INFO
+target_sqlite.egg-info/SOURCES.txt
+target_sqlite.egg-info/dependency_links.txt
+target_sqlite.egg-info/entry_points.txt
+target_sqlite.egg-info/requires.txt
+target_sqlite.egg-info/top_level.txt
+target_sqlite/utils/__init__.py
+target_sqlite/utils/error.py
+target_sqlite/utils/singer_target_utils.py

@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: singer-python
+Version: 5.12.2
+Summary: Singer.io utility library
+Home-page: http://singer.io
+Author: Stitch
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3 :: Only
+Provides-Extra: dev
