@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "properties": {
+    "sunrise": {
+      "type": ["string","null"],
+      "format": "date-time"
+    },
+    "sunset": {
+      "type": ["string","null"],
+      "format": "date-time"
+    },
+    "solar_noon": {
+      "type": ["string","null"],
+      "format": "date-time"
+    },
+    "day_length": {
+      "type": ["integer","null"]
+    },
+    "civil_twilight_begin": {
+      "type": ["string","null"],
+      "format": "date-time"
+    },
+    "civil_twilight_end": {
+      "type": ["string","null"],
+      "format": "date-time"
+    },
+    "nautical_twilight_begin": {
+      "type": ["string","null"],
+      "format": "date-time"
+    },
+    "nautical_twilight_end": {
+      "type": ["string","null"],
+      "format": "date-time"
+    },
+    "astronomical_twilight_begin": {
+      "type": ["string","null"],
+      "format": "date-time"
+    },
+    "astronomical_twilight_end": {
+      "type": ["string","null"],
+      "format": "date-time"
+    }
+  }
+}

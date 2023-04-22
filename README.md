@@ -1,54 +1,106 @@
-Author: Shreejeet Sahay
+# tap-sunrise-sunset
 
-Task:
-API Documentation: https://sunrise-sunset.org/api
+`tap-sunrise-sunset` is a Singer tap for sunrise_sunset.
 
-The task is to build a dataset for Sunrise and Sunset timing for Pune( lat=18.5204, long=73.8567) using above api using Singer.io open source ETL. 
+Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 
-The tap should perform the following function:
-1. Historical Load : load historical data since 1 Jan 2020
-2. Incremental Load : Append today’s data in existing target
-3. Transform data : Transform the timestamp from UTC to IST 
+## Installation
 
+- [ ] `Developer TODO:` Update the below as needed to correctly describe the install procedure. For instance, if you do not have a PyPi repo, or if you want users to directly install from your git repo, you can modify this step as appropriate.
 
-To load data we use Target. Use the following pre-built target to load the data:
+```bash
+pipx install tap-sunrise-sunset
+```
 
-meltano / target-sqlite · GitLab : https://gitlab.com/meltano/target-sqlite
+## Configuration
 
-Explanation:
-The "sunrise_sunset_DE/virtualenvs" folder contains 3 virtual environments-
-1. tap_singer- This environment has all the dependencies for the custom tap as mentioned in the task.
-2. target2_singer- This environment has all the dependencies for the target-sqlite as mentioned in the task
+### Accepted Config Options
 
-The custom tap has been developed using python and can be found at location "sunrise_sunset_DE/virtualenvs/tap_singer/bin/tap-api.py". Please refer the comments in tap-api.py file for explanation of the code.
+- [ ] `Developer TODO:` Provide a list of config options accepted by the tap.
 
-Now, we have a state.json file in "sunrise_sunset_DE" which initially has the below entry:
+A full list of supported settings and capabilities for this
+tap is available by running:
 
-{
+```bash
+tap-sunrise-sunset --about
+```
 
-	"last_record": 2019-12-31
-	
-}
+### Configure using environment variables
 
-As you will see in the paragraphs below, when running the etl pipeline using tap-api.py and target, we pass state.json as --state argument for the tap, and this particular json file contains the date for which last record was fetched. Hence, for the current invocation, we start from the date after this date in the last record in state.json, and fetch all the records from the tap till the current date, and once the etl pipeline completes, we update state.json with the last record's date of the current invocation, so that for the next invocation, data can be appended from the date after last record's date till the current date.
+This Singer tap will automatically import any environment variables within the working directory's
+`.env` if the `--config=ENV` is provided, such that config values will be considered if a matching
+environment variable is set either in the terminal context or in the `.env` file.
 
-As the requirement in the task was to start from 1st Jan 2020, the date has been kept as 31st December 2019 in state.json.
+### Source Authentication and Authorization
 
-The "sunrise_sunset_DE/config.json" file contains the configuration required for running the target-sqlite, which has target database name specified as "data_engineer_task.db".
+- [ ] `Developer TODO:` If your tap requires special access on the source system, or any special authentication requirements, provide those here.
 
-How the ETL has been run to create the present data_engineer_task.db?
-Assumption- We are in sunrise_sunset_DE directory. So <path_till_present_working_directory> will include sunrise_sunset_DE below.
-1. Activate the tap_singer virtual environment so that tap_api.py can be run.
+## Usage
 
-	$source virtualenvs/tap_singer/bin/activate
+You can easily run `tap-sunrise-sunset` by itself or in a pipeline using [Meltano](https://meltano.com/).
 
-2. Run the below command(--state is a necessary requirement for tap_api.py to fetch the last_record's date).
+### Executing the Tap Directly
 
-	$python3 <path_till_present_working_directory>/virtualenvs/tap_singer/bin/tap-api.py --state <path_till_present_working_directory>/state.json | <path_till_present_working_directory>/virtualenvs/target2_singer/bin/target-sqlite -c <path_till_present_working_directory>/config.json
+```bash
+tap-sunrise-sunset --version
+tap-sunrise-sunset --help
+tap-sunrise-sunset --config CONFIG --discover > ./catalog.json
+```
 
-The below is the output of the above command showing the state written to state.json, which is the last record added's date. In this case records from 1 day after 2019-12-31, i.e., 2020-01-01 till present day were added so the last record's date is 2022-07-05.
-	{"last_record": "2022-07-05"}
+## Developer Resources
 
+- [ ] `Developer TODO:` As a first step, scan the entire project for the text "`TODO:`" and complete any recommended steps, deleting the "TODO" references once completed.
 
-You can find the .db file created at-
-sunrise_sunset_DE/data_engineer_task.db
+### Initialize your Development Environment
+
+```bash
+pipx install poetry
+poetry install
+```
+
+### Create and Run Tests
+
+Create tests within the `tap_sunrise_sunset/tests` subfolder and
+  then run:
+
+```bash
+poetry run pytest
+```
+
+You can also test the `tap-sunrise-sunset` CLI interface directly using `poetry run`:
+
+```bash
+poetry run tap-sunrise-sunset --help
+```
+
+### Testing with [Meltano](https://www.meltano.com)
+
+_**Note:** This tap will work in any Singer environment and does not require Meltano.
+Examples here are for convenience and to streamline end-to-end orchestration scenarios._
+
+Your project comes with a custom `meltano.yml` project file already created. Open the `meltano.yml` and follow any _"TODO"_ items listed in
+the file.
+
+Next, install Meltano (if you haven't already) and any needed plugins:
+
+```bash
+# Install meltano
+pipx install meltano
+# Initialize meltano within this directory
+cd tap-sunrise-sunset
+meltano install
+```
+
+Now you can test and orchestrate using Meltano:
+
+```bash
+# Test invocation:
+meltano invoke tap-sunrise-sunset --version
+# OR run a test `elt` pipeline:
+meltano elt tap-sunrise-sunset target-jsonl
+```
+
+### SDK Dev Guide
+
+See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to 
+develop your own taps and targets.
